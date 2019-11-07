@@ -1,0 +1,56 @@
+<html>
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <a href="{% url 'home' %}">добавить дом</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Адресс</th>
+                <th scope="col">Площадь дома</th>
+                <th scope="col">Кол-во этажей</th>
+                <th scope="col">Год ввода в эксплуатацию</th>
+                <th scope="col">Последние изменения анкеты</th>
+                <th scope="col">Год постройки</th>
+                <th scope="col">Год ввода в экспулатацию</th>
+                <th scope="col">Серия</th>
+                <th scope="col">Тип дома</th>
+                <th scope="col">Фонд кап ремонта</th>
+                <th scope="col">Аварийный</th>
+                <th scope="col">Тип перекрытия</th>
+                <th scope="col">Материал стен</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for address in address_list %}
+            <tr>
+                <td>{{ address.region}} {{ address.city }} {{ address.street }} {{ address.house }}</td>
+                <td>{{ address.info.area }}</td>
+                <td>{{ address.info.stages }}</td>
+                <td>{{ address.info.year_exp }}</td>
+                <td>{{ address.info.last_changes }}</td>
+                <td>{{ address.info.year_build }}</td>
+                <td>{{ address.info.year_exp1 }}</td>
+                <td>{{ address.info.serial }}</td>
+                <td>{{ address.info.house_type }}</td>
+                <td>{{ address.info.fond }}</td>
+                <td>{{ address.info.danger }}</td>
+                <td>{{ address.info.wall_type }}</td>
+                <td>{{ address.info.wall_mat }}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td>{{ address_list.count }}</td>
+                <td>{{ max }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Найти</button>
+    </form>
+    
+</body>
+</html>
